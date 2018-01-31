@@ -11,7 +11,8 @@
 |
 */
 
-//Route::get('/pagina', 'PagineController');
-Route::resource('/pagina', 'PagineController');
+//Route::get('/pagina', 'PageController@index');
+Route::resource('/pagina', 'PageController');
+//Route::resource('/pagina', 'PagineController');
 
 Route::resource('/', 'HomeController');
