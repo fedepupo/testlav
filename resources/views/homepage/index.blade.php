@@ -1,1 +1,1 @@
-home page
+{{ $PageHome->id }}
