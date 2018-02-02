@@ -13,6 +13,7 @@
 
 //Route::get('/pagina', 'PageController@index');
 Route::resource('/pagina', 'PageController');
+Route::resource('/pagina/{id}/', 'PageController@show');
 //Route::resource('/pagina', 'PagineController');
 
 Route::resource('/', 'HomeController');

@@ -20,7 +20,7 @@ class PageController extends Controller
 
         // load the view and pass the pages
         return View::make('pages.index')
-            ->with('pages', $pages);
+        ->with('pages', $pages);
     }
 
     /**
@@ -52,6 +52,13 @@ class PageController extends Controller
     public function show($id)
     {
         //
+        $page = Page::where('id', '=', $id)->get();
+        foreach($page as $page_){
+            echo "<pre>";
+            print_r($page_);
+            echo "</pre>";
+        }
+
     }
 
     /**
