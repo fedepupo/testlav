@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePagesTable extends Migration
+class CreateNewsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,20 +13,17 @@ class CreatePagesTable extends Migration
      */
     public function up()
     {
-        Schema::create('pages', function (Blueprint $table) {
+        Schema::create('news', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
+            $table->string('title');
             $table->text('content');
-            $table->integer('active')->length(1)->default(0);
-            $table->integer('parent')->length(11)->default(0);
-            $table->integer('rank')->length(11)->default(0);
-            $table->integer('template_id')->length(11)->default(0);
+            $table->date('date');
+            $table->string('main_image')->nullable();
             $table->integer('language_id');
             $table->string('slug');
             $table->timestamp('created_at')->default(\DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->default(\DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
             $table->foreign('language_id')->references('id')->on('languages');
-            $table->foreign('template_id')->references('id')->on('templates');
         });
     }
 
@@ -37,6 +34,6 @@ class CreatePagesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('pages');
+        Schema::dropIfExists('news');
     }
 }

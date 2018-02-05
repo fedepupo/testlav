@@ -11,9 +11,12 @@
 |
 */
 
-//Route::get('/pagina', 'PageController@index');
-Route::resource('/pagina', 'PageController');
-Route::resource('/pagina/{id}/', 'PageController@show');
-//Route::resource('/pagina', 'PagineController');
+Route::resource('/', 'SlugController');
+Route::get('{slug}', 'SlugController@index')->where('slug', '(.*)');;
 
-Route::resource('/', 'HomeController');
+
+
+
+//Route::get('/pagina', 'PageController@index');
+//Route::resource('/pagina', 'PageController');
+//Route::resource('/pagina/{id}/', 'PageController@show');

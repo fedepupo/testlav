@@ -3,8 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Page;
-use View;
+use App\Language;
 
 class PageController extends Controller
 {
@@ -15,82 +14,18 @@ class PageController extends Controller
      */
     public function index()
     {
-        // get all the nerds
-        $pages = Page::all();
+        /*$languages = Language::all()->where('active', '1');                
+        $pages = Language::find(1)->pages()->where('active', '1')->get();
 
-        // load the view and pass the pages
         return View::make('pages.index')
-        ->with('pages', $pages);
+        ->with('languages', $languages)
+        ->with('pages', $pages);*/
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return Response
-     */
-    public function create()
-    {
-        //
-    }
+    public function getprimaryMenu($language_id, $parent = 0){
+                      
+        $pages = Language::find($language_id)->pages()->where('active', '1')->where('parent', $parent)->get();
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @return Response
-     */
-    public function store()
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function show($id)
-    {
-        //
-        $page = Page::where('id', '=', $id)->get();
-        foreach($page as $page_){
-            echo "<pre>";
-            print_r($page_);
-            echo "</pre>";
-        }
-
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function update($id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function destroy($id)
-    {
-        //
+        return $pages;
     }
 }
