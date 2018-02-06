@@ -96,7 +96,7 @@ class InsertStaticData extends Migration
                 'template_id' => 2,
                 'language_id' => 2,
                 'parent' => 0,
-                'slug' => 'pagina-1-EN-4',
+                'slug' => 'en/pagina-1-EN-4',
             ),
             array(
                 'name' => 'Pagina 2 EN',
@@ -105,7 +105,7 @@ class InsertStaticData extends Migration
                 'template_id' => 2,
                 'language_id' => 2,
                 'parent' => 0,
-                'slug' => 'pagina-2-EN-5',
+                'slug' => 'en/pagina-2-EN-5',
             ),
             array(
                 'name' => 'Pagina 1 di 1 IT',
@@ -123,7 +123,7 @@ class InsertStaticData extends Migration
                 'template_id' => 2,
                 'language_id' => 2,
                 'parent' => 5,
-                'slug' => 'pagina-1-di-1-EN',
+                'slug' => 'en/pagina-1-di-1-EN',
             ),
             array(
                 'name' => 'Lista news IT',
@@ -141,7 +141,7 @@ class InsertStaticData extends Migration
                 'template_id' => 3,
                 'language_id' => 2,
                 'parent' => 0,
-                'slug' => 'lista-news-EN',
+                'slug' => 'en/lista-news-EN',
             )
         );
 
@@ -161,7 +161,7 @@ class InsertStaticData extends Migration
                 'content' => 'content news 1 EN',
                 'date' => '20180205',
                 'language_id' => '2',
-                'slug' => 'news-1-EN'
+                'slug' => 'en/lista-news-EN/news-1-EN'
             )
         );
 
@@ -196,13 +196,13 @@ class InsertStaticData extends Migration
                 'seo_description' => 'Description pagina-2-IT',
             ),
             array(
-                'slug' => 'pagina-1-EN-4',
+                'slug' => 'en/pagina-1-EN-4',
                 'model' => 'Page',
                 'seo_title' => 'Title pagina-1-EN',
                 'seo_description' => 'Description pagina-1-EN',
             ),
             array(
-                'slug' => 'pagina-2-EN-5',
+                'slug' => 'en/pagina-2-EN-5',
                 'model' => 'Page',
                 'seo_title' => 'Title pagina-2-EN',
                 'seo_description' => 'Description pagina-2-EN',
@@ -214,13 +214,13 @@ class InsertStaticData extends Migration
                 'seo_description' => 'Description pagina-1-di-1-IT',
             ),
             array(
-                'slug' => 'pagina-1-di-1-EN',
+                'slug' => 'en/pagina-1-di-1-EN',
                 'model' => 'Page',
                 'seo_title' => 'Title pagina-1-di-1-EN',
                 'seo_description' => 'Description pagina-1-di-1-EN',
             ),
             array(
-                'slug' => 'news-1-EN',
+                'slug' => 'en/lista-news-EN/news-1-EN',
                 'model' => 'News',
                 'seo_title' => 'Title news-1-EN',
                 'seo_description' => 'Description news-1-EN',
@@ -238,7 +238,7 @@ class InsertStaticData extends Migration
                 'seo_description' => 'Description pagina-1-di-1-IT',
             ),
             array(
-                'slug' => 'lista-news-EN',
+                'slug' => 'en/lista-news-EN',
                 'model' => 'Page',
                 'seo_title' => 'Title lista-news-EN',
                 'seo_description' => 'Description pagina-1-di-1-EN',
