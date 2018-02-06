@@ -5,12 +5,13 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Slug;
 use App\Language;
+use App\Product;
 use View;
 
 class SlugController extends Controller
 {
 
-	public function index($slug = '', PageController $PageController, Request $Request, NewsController $NewsController)
+	public function index($slug = '', PageController $PageController, Request $Request, NewsController $NewsController, ProductController $ProductController)
 	{
 		$current_language = null;
 
@@ -43,6 +44,16 @@ class SlugController extends Controller
 			case "News":
 			$news = Slug::find($slug->id)->news()->first();
 			$view = "news.detail";
+			break;
+
+			case "ProductCategory":
+			$product_categories = Slug::find($slug->id)->product_categories()->first();					
+			$view = "pages.productslist";
+			break;
+
+			case "Product":
+			$product = Slug::find($slug->id)->products()->first();					
+			$view = "products.detail";
 			break;
 		}
 
@@ -88,6 +99,39 @@ class SlugController extends Controller
 				->with('news', $news)
 				->with('pages', $pages);	
 				break;
+
+				case "pages.productcategorieslist":
+
+				$product_categories = $ProductController->getAllProductsCategories($current_language->id);
+
+				$View = View::make($view)
+				->with('slug', $slug)
+				->with('languages', $languages)
+				->with('page', $page)
+				->with('product_categories', $product_categories)
+				->with('pages', $pages);	
+				break;
+
+				case "pages.productslist":
+
+				$products = $ProductController->getAllProductsInCategory($product_categories->id);
+
+				$View = View::make($view)
+				->with('slug', $slug)
+				->with('languages', $languages)
+				->with('products', $products)
+				->with('pages', $pages);
+				break;
+
+				case "products.detail":
+
+				$View = View::make($view)
+				->with('slug', $slug)
+				->with('languages', $languages)
+				->with('product', $product)
+				->with('pages', $pages);
+				break;
+
 			}
 
 			return $View;

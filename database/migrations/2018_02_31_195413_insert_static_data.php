@@ -47,6 +47,22 @@ class InsertStaticData extends Migration
             array(
                 'name' => 'Lista News',
                 'view' => 'pages.newslist'
+            ),
+            array(
+                'name' => 'Lista categorie prodotti',
+                'view' => 'pages.productcategorieslist'
+            ),
+            array(
+                'name' => 'Lista prodotti',
+                'view' => 'pages.productslist'
+            ),
+            array(
+                'name' => 'Dettaglio news',
+                'view' => 'news.detail'
+            ),
+            array(
+                'name' => 'Dettaglio prodotto',
+                'view' => 'products.detail'
             )
         );
 
@@ -142,11 +158,28 @@ class InsertStaticData extends Migration
                 'language_id' => 2,
                 'parent' => 0,
                 'slug' => 'en/lista-news-EN',
+            ),
+            array(
+                'name' => 'Lista prodotti IT',
+                'content' => 'Lista prodotti IT',
+                'active' => 1,
+                'template_id' => 4,
+                'language_id' => 1,
+                'parent' => 0,
+                'slug' => 'lista-prodotti-IT',
+            ),
+            array(
+                'name' => 'Lista prodotti EN',
+                'content' => 'Lista prodotti EN',
+                'active' => 1,
+                'template_id' => 4,
+                'language_id' => 2,
+                'parent' => 0,
+                'slug' => 'en/lista-prodotti-EN',
             )
         );
 
         DB::table('pages')->insert($pages);
-
 
         $news = array(
             array(
@@ -226,7 +259,7 @@ class InsertStaticData extends Migration
                 'seo_description' => 'Description news-1-EN',
             ),
             array(
-                'slug' => 'news-1-IT',
+                'slug' => 'lista-news-IT/news-1-IT',
                 'model' => 'News',
                 'seo_title' => 'Title news-1-IT',
                 'seo_description' => 'Description news-1-IT',
@@ -243,9 +276,120 @@ class InsertStaticData extends Migration
                 'seo_title' => 'Title lista-news-EN',
                 'seo_description' => 'Description pagina-1-di-1-EN',
             ),
+            array(
+                'slug' => 'lista-prodotti-IT',
+                'model' => 'Page',
+                'seo_title' => 'Title lista-prodotti-IT',
+                'seo_description' => 'Description lista prodotti 1 IT',
+            ),
+            array(
+                'slug' => 'en/lista-prodotti-EN',
+                'model' => 'Page',
+                'seo_title' => 'Title lista-prodotti-EN',
+                'seo_description' => 'Description lista prodotti 1 EN',
+            ),
+            array(
+                'slug' => 'lista-prodotti-IT/categoria-1-IT',
+                'model' => 'ProductCategory',
+                'seo_title' => 'Title categoria prodotti 1 IT',
+                'seo_description' => 'Description categoria prodotti 1 IT',
+            ),
+            array(
+                'slug' => 'en/lista-prodotti-EN/categoria-1-EN',
+                'model' => 'ProductCategory',
+                'seo_title' => 'Title categoria prodotti 1 EN',
+                'seo_description' => 'Description categoria prodotti 1 EN',
+            ),
+            array(
+                'slug' => 'lista-prodotti-IT/categoria-1-IT/prodotto-1-IT',
+                'model' => 'Product',
+                'seo_title' => 'Title prodotto 1 IT',
+                'seo_description' => 'Description prodotto 1 IT',
+            ),
+            array(
+                'slug' => 'lista-prodotti-IT/categoria-1-IT/prodotto-2-IT',
+                'model' => 'Product',
+                'seo_title' => 'Title prodotti 2 IT',
+                'seo_description' => 'Description prodotto 2 IT',
+            ),
+            array(
+                'slug' => 'en/lista-prodotti-EN/categoria-1-EN/prodotto-1-EN',
+                'model' => 'Product',
+                'seo_title' => 'Title prodotti 1 EN',
+                'seo_description' => 'Description prodotto 1 EN',
+            ),
+            array(
+                'slug' => 'en/lista-prodotti-EN/categoria-1-EN/prodotto-2-EN',
+                'model' => 'Product',
+                'seo_title' => 'Title prodotti 2 EN',
+                'seo_description' => 'Description prodotto 2 EN',
+            )
         );
 
         DB::table('slugs')->insert($slugs);
+
+
+        $product_categories = array(
+            array(
+                'name' => 'categoria 1 IT',
+                'description' => 'content categoria 1 IT',
+                'active' => '1',
+                'rank' => '1',
+                'language_id' => '1',
+                'slug' => 'lista-prodotti-IT/categoria-1-IT'
+            ),
+            array(
+                'name' => 'categoria 1 EN',
+                'description' => 'content categoria 1 EN',
+                'active' => '1',
+                'rank' => '1',
+                'language_id' => '2',
+                'slug' => 'en/lista-prodotti-EN/categoria-1-EN'
+            )
+        );
+
+        DB::table('product_categories')->insert($product_categories);
+
+        $products = array(
+            array(
+                'name' => 'prodotto 1 IT',
+                'description' => 'description prodotto 1 IT',
+                'price' => '1000',
+                'active' => '1',
+                'rank' => '1',
+                'product_categories_id' => '1',
+                'slug' => 'lista-prodotti-IT/categoria-1-IT/prodotto-1-IT'
+            ),
+            array(
+                'name' => 'prodotto 2 IT',
+                'description' => 'description prodotto 2 IT',
+                'price' => '1100',
+                'active' => '1',
+                'rank' => '10',
+                'product_categories_id' => '1',
+                'slug' => 'lista-prodotti-IT/categoria-1-IT/prodotto-2-IT'
+            ),
+            array(
+                'name' => 'prodotto 1 EN',
+                'description' => 'description prodotto 1 EN',
+                'price' => '2000',
+                'active' => '1',
+                'rank' => '1',
+                'product_categories_id' => '2',
+                'slug' => 'en/lista-prodotti-EN/categoria-1-EN/prodotto-1-EN'
+            ),
+            array(
+                'name' => 'prodotto 2 EN',
+                'description' => 'description prodotto 2 EN',
+                'price' => '2100',
+                'active' => '1',
+                'rank' => '10',
+                'product_categories_id' => '2',
+                'slug' => 'en/lista-prodotti-EN/categoria-1-EN/prodotto-2-EN'
+            )
+        );
+
+        DB::table('products')->insert($products);
     }
 
     /**

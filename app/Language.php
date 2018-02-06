@@ -13,4 +13,8 @@ class Language extends Model
 	function news(){        
 		return $this->hasMany('App\News', 'language_id', 'id');
 	}
+
+	function product_categories(){        
+		return $this->hasMany('App\ProductCategory', 'language_id', 'id');
+	}
 }
