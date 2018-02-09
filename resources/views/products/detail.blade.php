@@ -14,6 +14,7 @@
                 <td>Active</td>
                 <td>Rank</td>
                 <td>Slug</td>
+                <td>Brand</td>
                 <td>SEO Title</td>
                 <td>SEO Description</td>
             </tr>
@@ -27,6 +28,7 @@
                 <td>{{ $product->active }}</td>
                 <td>{{ $product->rank }}</td>
                 <td>{{ $product->slug }}</td>
+                <td>{{ $product->brands->descrizione }}</td>
                 <td>{{ $slug->seo_title }}</td>
                 <td>{{ $slug->seo_description }}</td>
             </tr>

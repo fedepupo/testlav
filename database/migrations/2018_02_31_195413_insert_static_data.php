@@ -352,39 +352,47 @@ class InsertStaticData extends Migration
 
         $products = array(
             array(
+                'codice_articolo' => '98339812',
                 'name' => 'prodotto 1 IT',
                 'description' => 'description prodotto 1 IT',
                 'price' => '1000',
                 'active' => '1',
                 'rank' => '1',
                 'product_categories_id' => '1',
+                'brand_id' => '412',
                 'slug' => 'lista-prodotti-IT/categoria-1-IT/prodotto-1-IT'
             ),
             array(
+                'codice_articolo' => '98338106',
                 'name' => 'prodotto 2 IT',
                 'description' => 'description prodotto 2 IT',
                 'price' => '1100',
                 'active' => '1',
                 'rank' => '10',
                 'product_categories_id' => '1',
+                'brand_id' => '9',
                 'slug' => 'lista-prodotti-IT/categoria-1-IT/prodotto-2-IT'
             ),
             array(
+                'codice_articolo' => '98339812',
                 'name' => 'prodotto 1 EN',
                 'description' => 'description prodotto 1 EN',
                 'price' => '2000',
                 'active' => '1',
                 'rank' => '1',
                 'product_categories_id' => '2',
+                'brand_id' => '412',
                 'slug' => 'en/lista-prodotti-EN/categoria-1-EN/prodotto-1-EN'
             ),
             array(
+                'codice_articolo' => '98338106',
                 'name' => 'prodotto 2 EN',
                 'description' => 'description prodotto 2 EN',
                 'price' => '2100',
                 'active' => '1',
                 'rank' => '10',
                 'product_categories_id' => '2',
+                'brand_id' => '9',
                 'slug' => 'en/lista-prodotti-EN/categoria-1-EN/prodotto-2-EN'
             )
         );

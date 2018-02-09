@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Slug;
 use App\Language;
 use App\Product;
+use App\Brand;
 use View;
 
 class SlugController extends Controller
@@ -124,7 +125,7 @@ class SlugController extends Controller
 				break;
 
 				case "products.detail":
-
+		
 				$View = View::make($view)
 				->with('slug', $slug)
 				->with('languages', $languages)

@@ -23,6 +23,8 @@ class CreateProductsTable extends Migration
             $table->string('slug');
             $table->integer('product_categories_id');
             $table->foreign('product_categories_id')->references('id')->on('product_categories');
+            $table->integer('brand_id');
+            $table->foreign('brand_id')->references('marca')->on('li_marche');
         });
     }
 
