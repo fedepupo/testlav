@@ -14,7 +14,7 @@ class CreateProductsTable extends Migration
     public function up()
     {
         Schema::create('products', function (Blueprint $table) {
-            $table->increments('id');
+            $table->string('codice_articolo')->length(10);
             $table->string('name');
             $table->string('description');
             $table->string('price');
@@ -25,6 +25,12 @@ class CreateProductsTable extends Migration
             $table->foreign('product_categories_id')->references('id')->on('product_categories');
             $table->integer('brand_id');
             $table->foreign('brand_id')->references('marca')->on('li_marche');
+            $table->integer('tavolozza_colori');
+            $table->foreign('tavolozza_colori')->references('tavolozza_colori')->on('li_articoli');
+            $table->integer('tipo_taglia');
+            $table->foreign('tipo_taglia')->references('tipo_taglia')->on('li_taglie');
+            $table->integer('tipo_taglia_normalizzata');
+            $table->foreign('tipo_taglia_normalizzata')->references('tipo_taglia2')->on('li_taglie');
         });
     }
 

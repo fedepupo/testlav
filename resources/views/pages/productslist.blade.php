@@ -7,7 +7,7 @@
     <table class="table table-striped table-bordered">
         <thead>
             <tr>
-                <td>ID</td>
+                <td>Codice articolo</td>
                 <td>Name</td>
                 <td>Description</td>
                 <td>Price</td>
@@ -20,7 +20,7 @@
         <tbody>
             @foreach($products as $key => $value)
             <tr>
-                <td>{{ $value->id }}</td>
+                <td>{{ $value->codice_articolo }}</td>
                 <td>{{ $value->name }}</td>
                 <td>{{ $value->description }}</td>
                 <td>{{ $value->price }}</td>

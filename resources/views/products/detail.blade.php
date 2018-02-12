@@ -7,7 +7,7 @@
     <table class="table table-striped table-bordered">
         <thead>
             <tr>
-                <td>ID</td>
+                <td>Codice articolo</td>
                 <td>Name</td>
                 <td>Description</td>
                 <td>Price</td>
@@ -21,7 +21,7 @@
         </thead>
         <tbody>
             <tr>
-                <td>{{ $product->id }}</td>
+                <td>{{ $product->codice_articolo }}</td>
                 <td>{{ $product->name }}</td>
                 <td>{{ $product->description }}</td>
                 <td>{{ $product->price }}</td>
@@ -35,6 +35,33 @@
         </tbody>
     </table>
 
-    @include('includes.footer')
+    <table class="table table-striped table-bordered">
+        <thead>
+            <tr>
+                <td>Barcode</td>
+                <td>Taglia</td>
+                <td>Taglia descrizione</td>
+                <td>Taglia normalizzata descrizione</td>
+                <td>Colore</td>
+                <td>Colore descrizione</td>
+                <td>Stock magazzino</td>
+            </tr>
+        </thead>
+        <tbody>
+         @foreach($product->barcodes as $barcode)
+         <tr>
+            <td>{{ $barcode->barcode }}</td>
+            <td>{{ $barcode->taglia }}</td>
+            <td>{{ $barcode->taglia_descrizione }}</td>
+            <td>{{ $barcode->taglia_normalizzata_descrizione }}</td>
+            <td>{{ $barcode->colore }}</td>
+            <td>{{ $barcode->colore_descrizione }}</td>
+            <td>{{ $barcode->stock_magazzino }}</td>
+        </tr>
+        @endforeach
+    </tbody>
+</table>
+
+@include('includes.footer')
 </body>
 </html>

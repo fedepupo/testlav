@@ -360,6 +360,9 @@ class InsertStaticData extends Migration
                 'rank' => '1',
                 'product_categories_id' => '1',
                 'brand_id' => '412',
+                'tavolozza_colori' => '7305',
+                'tipo_taglia' => '506',
+                'tipo_taglia_normalizzata' => '691',
                 'slug' => 'lista-prodotti-IT/categoria-1-IT/prodotto-1-IT'
             ),
             array(
@@ -371,6 +374,9 @@ class InsertStaticData extends Migration
                 'rank' => '10',
                 'product_categories_id' => '1',
                 'brand_id' => '9',
+                'tavolozza_colori' => '201',
+                'tipo_taglia' => '506',
+                'tipo_taglia_normalizzata' => '320',
                 'slug' => 'lista-prodotti-IT/categoria-1-IT/prodotto-2-IT'
             ),
             array(
@@ -382,6 +388,9 @@ class InsertStaticData extends Migration
                 'rank' => '1',
                 'product_categories_id' => '2',
                 'brand_id' => '412',
+                'tavolozza_colori' => '7305',
+                'tipo_taglia' => '506',
+                'tipo_taglia_normalizzata' => '691',
                 'slug' => 'en/lista-prodotti-EN/categoria-1-EN/prodotto-1-EN'
             ),
             array(
@@ -393,6 +402,9 @@ class InsertStaticData extends Migration
                 'rank' => '10',
                 'product_categories_id' => '2',
                 'brand_id' => '9',
+                'tavolozza_colori' => '201',
+                'tipo_taglia' => '506',
+                'tipo_taglia_normalizzata' => '320',
                 'slug' => 'en/lista-prodotti-EN/categoria-1-EN/prodotto-2-EN'
             )
         );

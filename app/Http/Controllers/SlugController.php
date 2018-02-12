@@ -53,7 +53,19 @@ class SlugController extends Controller
 			break;
 
 			case "Product":
-			$product = Slug::find($slug->id)->products()->first();					
+			$product = Slug::find($slug->id)->products()->first();
+			$product->getPrice();
+			foreach($product->barcodes as $barcode){
+				$colore = $barcode->getColor($product->tavolozza_colori);
+				$barcode->colore_descrizione = $colore->descrizione;
+
+				$taglia = $barcode->getSize($product->tipo_taglia);
+				$barcode->taglia_descrizione = $taglia->descrizione;
+
+				$taglia = $barcode->getSize($product->tipo_taglia_normalizzata);
+				$barcode->taglia_normalizzata_descrizione = $taglia->descrizione;
+			}
+			
 			$view = "products.detail";
 			break;
 		}
@@ -125,7 +137,7 @@ class SlugController extends Controller
 				break;
 
 				case "products.detail":
-		
+
 				$View = View::make($view)
 				->with('slug', $slug)
 				->with('languages', $languages)
