@@ -19,6 +19,8 @@ class CreateLanguagesTable extends Migration
             $table->string('code')->length(2);
             $table->integer('is_primary')->length(1);
             $table->integer('active')->length(1);
+            $table->index('is_primary');
+            $table->index('active');
         });
     }
 

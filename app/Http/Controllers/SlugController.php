@@ -16,8 +16,9 @@ class SlugController extends Controller
 
 	public function index($slug = '', PageController $PageController, Request $Request, NewsController $NewsController, ProductController $ProductController)
 	{
+		//Cache::flush();
 		$current_language = null;
-		$expiresAt = Carbon::now()->addMinutes(1);
+		$expiresAt = Carbon::now()->addMinutes($_ENV['CACHE_TIME']);
 
 		$exp = explode("/", $Request->path());
 		$current_url_code = $exp[0];
@@ -38,7 +39,10 @@ class SlugController extends Controller
 		
 		$pages = $PageController->getprimaryMenu($current_language->id);		
 
-		$Slug = Slug::where("slug", $slug)->first();
+		$Slug = Cache::remember('Slug_'.md5($slug), $expiresAt, function () use ($slug) {
+			return Slug::where("slug", $slug)->first();;
+		});
+		//$Slug = Slug::where("slug", $slug)->first();
 		if(!isset($Slug->model)){
 			$Slug = $this->getNewSlug($slug);	
 		}
@@ -59,18 +63,23 @@ class SlugController extends Controller
 			$product_categories = Slug::find($Slug->id)->product_categories()->first();					
 			$product_categories_id = $product_categories->id;
 
-			$filters = Cache::remember('filters', $expiresAt, function () use ($product_categories_id) {
+			$filters = Cache::remember('filters_'.$product_categories_id, $expiresAt, function () use ($product_categories_id) {
 				return \App\ProductCategory::find($product_categories_id)->filters()->get();				
 			});
 
 			if(!empty($filters)){
 				foreach($filters as $filter){
-					$filter->options = \App\Filter::find($filter->id)->options()->get();
+					//$filter->options = \App\Filter::find($filter->id)->options()->get();
+
+					$filter_id = $filter->id;
+					$filter->options = Cache::remember('filters_options_'.$filter_id, $expiresAt, function () use ($filter_id) {
+						return \App\Filter::find($filter_id)->options()->get();
+					});
+
 					if(!empty($filter->options)){
 						foreach($filter->options as $option){
 
 							$option_id = $option->id;
-
 
 							$option->count = Cache::remember('count_filter_'.$option->id, $expiresAt, function () use ($product_categories_id, $current_language_id, $option_id) {
 								return \App\ProductCategory::find($product_categories_id)
@@ -157,7 +166,7 @@ class SlugController extends Controller
 
 				case "pages.productcategorieslist":
 
-				$product_categories = $ProductController->getAllProductsCategories($current_language->id);
+				$product_categories = $ProductController->getAllProductsCategories($current_language->id);		
 
 				$View = View::make($view)
 				->with('slug', $Slug)
@@ -171,13 +180,16 @@ class SlugController extends Controller
 
 				if(!empty($this->url)){
 					$exp = explode("-", $this->url[0]);
+					$filter_option_id = $exp[0]; 
 
-					$products = \App\ProductCategory::find($product_categories->id)
-					->products()
-					->join('products_filters_options', 'products.codice_articolo', '=', 'products_filters_options.codice_articolo')
-					->where('language_id', $current_language->id)
-					->where('filter_option_id', $exp[0])
-					->get();
+					$products = Cache::remember('products', $expiresAt, function () use ($product_categories_id, $current_language_id, $filter_option_id) {
+						return \App\ProductCategory::find($product_categories_id)
+						->products()
+						->join('products_filters_options', 'products.codice_articolo', '=', 'products_filters_options.codice_articolo')
+						->where('language_id', $current_language_id)
+						->where('filter_option_id', $filter_option_id)
+						->get();
+					});
 
 					$filtered = $products->reject(function ($item, $key) {							
 						echo "<pre>";
@@ -189,10 +201,16 @@ class SlugController extends Controller
 
 					$products = $filtered->all();
 				}else{
-					$products = \App\ProductCategory::find($product_categories->id)->products()->where('language_id', $current_language->id)->get();												
+					$products = Cache::remember('products_'.$product_categories_id."_".$current_language_id, $expiresAt, function () use ($product_categories_id, $current_language_id) {
+						return \App\ProductCategory::find($product_categories_id)->products()->where('language_id', $current_language_id)->get();
+					});
 				}
-				$product_categories = \App\ProductCategory::where('parent', $product_categories->id)->get();						
 
+				$product_categories = Cache::remember('product_categories_'.$product_categories_id, $expiresAt, function () use ($product_categories_id) {
+					return \App\ProductCategory::where('parent', $product_categories_id)->get();						
+				});
+				//$product_categories = \App\ProductCategory::where('parent', $product_categories->id)->get();						
+				
 
 				$View = View::make($view)
 				->with('slug', $Slug)

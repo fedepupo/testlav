@@ -15,6 +15,16 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Schema::defaultStringLength(191);
+
+        if ($_ENV['APP_LOG_QUERY'] === true) {            
+            if ($this->app->environment('local')) {
+                \DB::listen(function($query) {
+                    $dbLog = new \Monolog\Logger('Query');
+                    $dbLog->pushHandler(new \Monolog\Handler\RotatingFileHandler(storage_path('logs/query.log'), 5, \Monolog\Logger::DEBUG));
+                    $dbLog->info($query->sql, ['Bindings' => $query->bindings, 'Time' => $query->time]);
+                });
+            }
+        }
     }
 
     /**
