@@ -10,6 +10,7 @@
                 <td>Codice articolo</td>
                 <td>Name</td>
                 <td>Description</td>
+                <td>Price list</td>
                 <td>Price</td>
                 <td>Active</td>
                 <td>Rank</td>
@@ -24,6 +25,7 @@
                 <td>{{ $product->codice_articolo }}</td>
                 <td>{{ $product->name }}</td>
                 <td>{{ $product->description }}</td>
+                <td>{{ $product->price_list }}</td>
                 <td>{{ $product->price }}</td>
                 <td>{{ $product->active }}</td>
                 <td>{{ $product->rank }}</td>
@@ -48,8 +50,8 @@
             </tr>
         </thead>
         <tbody>
-         @foreach($product->barcodes as $barcode)
-         <tr>
+           @foreach($product->barcodes as $barcode)
+           <tr>
             <td>{{ $barcode->barcode }}</td>
             <td>{{ $barcode->taglia }}</td>
             <td>{{ $barcode->taglia_descrizione }}</td>
@@ -62,6 +64,27 @@
     </tbody>
 </table>
 
+    <table class="table table-striped table-bordered">
+        <thead>
+            <tr>
+                <td>ID</td>
+                <td>Filter Name</td>
+                <td>Name</td>
+            </tr>
+        </thead>
+        <tbody>
+           @foreach($filter_options as $filter_option)
+           <?
+           $filter = $filter_option->filter()->first();
+           ?>
+           <tr>
+            <td>{{ $filter_option->id }}</td>
+            <td>{{ $filter->name }}</td>
+            <td>{{ $filter_option->name }}</td>
+        </tr>
+        @endforeach
+    </tbody>
+</table>
 @include('includes.footer')
 </body>
 </html>

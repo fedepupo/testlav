@@ -22,6 +22,8 @@ class CreateCategoryProductsTable extends Migration
             $table->string('slug');
             $table->integer('language_id');
             $table->foreign('language_id')->references('id')->on('languages');
+            $table->integer('parent')->default(0);
+            $table->foreign('parent')->references('id')->on('product_categories');
         });
     }
 

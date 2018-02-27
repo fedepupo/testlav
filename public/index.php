@@ -1,5 +1,5 @@
 <?php
-
+$start = explode(" ", microtime());
 /**
  * Laravel - A PHP Framework For Web Artisans
  *
@@ -56,3 +56,9 @@ $response = $kernel->handle(
 $response->send();
 
 $kernel->terminate($request, $response);
+
+
+$end = explode(" ", microtime());
+$time = ($end[1]-$start[1])+($end[0]-$start[0]);
+?>
+	<div style="position:fixed;right:0;bottom:0;padding:5px 10px;background:green;color:#FFF">Tempo: <?=$time?></div>

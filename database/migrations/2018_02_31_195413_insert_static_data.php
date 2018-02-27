@@ -3,14 +3,10 @@
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Support\Facades\DB;
 
 class InsertStaticData extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
     public function up()
     {
         $languages = array(
@@ -160,7 +156,7 @@ class InsertStaticData extends Migration
                 'slug' => 'en/lista-news-EN',
             ),
             array(
-                'name' => 'Lista prodotti IT',
+                'name' => 'Lista categorie prodotti IT',
                 'content' => 'Lista prodotti IT',
                 'active' => 1,
                 'template_id' => 4,
@@ -169,7 +165,7 @@ class InsertStaticData extends Migration
                 'slug' => 'lista-prodotti-IT',
             ),
             array(
-                'name' => 'Lista prodotti EN',
+                'name' => 'Lista categorie prodotti EN',
                 'content' => 'Lista prodotti EN',
                 'active' => 1,
                 'template_id' => 4,
@@ -301,6 +297,24 @@ class InsertStaticData extends Migration
                 'seo_description' => 'Description categoria prodotti 1 EN',
             ),
             array(
+                'slug' => 'sport/calcio-e-calcetto/scarpe-e-parastinchi',
+                'model' => 'ProductCategory',
+                'seo_title' => 'Title categoria prodotti 1 EN',
+                'seo_description' => 'Description categoria prodotti 1 EN',
+            ),
+            array(
+                'slug' => 'sport/calcio-e-calcetto',
+                'model' => 'ProductCategory',
+                'seo_title' => 'Title categoria prodotti 1 EN',
+                'seo_description' => 'Description categoria prodotti 1 EN',
+            ),
+            array(
+                'slug' => 'sport',
+                'model' => 'ProductCategory',
+                'seo_title' => 'Title categoria prodotti 1 EN',
+                'seo_description' => 'Description categoria prodotti 1 EN',
+            ),
+            array(
                 'slug' => 'lista-prodotti-IT/categoria-1-IT/prodotto-1-IT',
                 'model' => 'Product',
                 'seo_title' => 'Title prodotto 1 IT',
@@ -326,99 +340,209 @@ class InsertStaticData extends Migration
             )
         );
 
-        DB::table('slugs')->insert($slugs);
+DB::table('slugs')->insert($slugs);
 
 
-        $product_categories = array(
-            array(
-                'name' => 'categoria 1 IT',
-                'description' => 'content categoria 1 IT',
-                'active' => '1',
-                'rank' => '1',
-                'language_id' => '1',
-                'slug' => 'lista-prodotti-IT/categoria-1-IT'
-            ),
-            array(
-                'name' => 'categoria 1 EN',
-                'description' => 'content categoria 1 EN',
-                'active' => '1',
-                'rank' => '1',
-                'language_id' => '2',
-                'slug' => 'en/lista-prodotti-EN/categoria-1-EN'
-            )
-        );
+$product_categories = array(
+    array(
+        'name' => 'categoria 1 IT',
+        'description' => 'content categoria 1 IT',
+        'active' => '1',
+        'rank' => '1',
+        'language_id' => '1',
+        'slug' => 'lista-prodotti-IT/categoria-1-IT',
+        'parent' => '0'
+    ),
+    array(
+        'name' => 'categoria 1 EN',
+        'description' => 'content categoria 1 EN',
+        'active' => '1',
+        'rank' => '1',
+        'language_id' => '2',
+        'slug' => 'en/lista-prodotti-EN/categoria-1-EN',
+        'parent' => '0'
+    ),
+    array(
+        'name' => 'sport',
+        'description' => '',
+        'active' => '1',
+        'rank' => '10',
+        'language_id' => '1',
+        'slug' => 'sport',
+        'parent' => '0'
+    ),
+    array(
+        'name' => 'calcio e calcetto',
+        'description' => '',
+        'active' => '1',
+        'rank' => '1',
+        'language_id' => '1',
+        'slug' => 'sport/calcio-e-calcetto',
+        'parent' => '3'
+    ),
+    array(
+        'name' => 'scarpe e parastinchi',
+        'description' => '',
+        'active' => '1',
+        'rank' => '1',
+        'language_id' => '1',
+        'slug' => 'sport/calcio-e-calcetto/scarpe-e-parastinchi',
+        'parent' => '4'
+    )
+);
 
-        DB::table('product_categories')->insert($product_categories);
+DB::table('product_categories')->insert($product_categories);
 
+$products = array(
+    array(
+        'codice_articolo' => '98339812',
+        'name' => 'prodotto 1 IT',
+        'description' => 'description prodotto 1 IT',
+        'price' => '1000',
+        'active' => '1',
+        'rank' => '1',
+        'brand_id' => '412',
+        'tavolozza_colori' => '7305',
+        'tipo_taglia' => '506',
+        'tipo_taglia_normalizzata' => '691',
+        'slug' => 'lista-prodotti-IT/categoria-1-IT/prodotto-1-IT',
+        'language_id' => '1'
+    ),
+    array(
+        'codice_articolo' => '98338106',
+        'name' => 'prodotto 2 IT',
+        'description' => 'description prodotto 2 IT',
+        'price' => '1100',
+        'active' => '1',
+        'rank' => '10',
+        'brand_id' => '9',
+        'tavolozza_colori' => '201',
+        'tipo_taglia' => '506',
+        'tipo_taglia_normalizzata' => '320',
+        'slug' => 'lista-prodotti-IT/categoria-1-IT/prodotto-2-IT',
+        'language_id' => '1'
+    ),
+    array(
+        'codice_articolo' => '98339812',
+        'name' => 'prodotto 1 EN',
+        'description' => 'description prodotto 1 EN',
+        'price' => '2000',
+        'active' => '1',
+        'rank' => '1',
+        'brand_id' => '412',
+        'tavolozza_colori' => '7305',
+        'tipo_taglia' => '506',
+        'tipo_taglia_normalizzata' => '691',
+        'slug' => 'en/lista-prodotti-EN/categoria-1-EN/prodotto-1-EN',
+        'language_id' => '2'
+    ),
+    array(
+        'codice_articolo' => '98338106',
+        'name' => 'prodotto 2 EN',
+        'description' => 'description prodotto 2 EN',
+        'price' => '2100',
+        'active' => '1',
+        'rank' => '10',
+        'brand_id' => '9',
+        'tavolozza_colori' => '201',
+        'tipo_taglia' => '506',
+        'tipo_taglia_normalizzata' => '320',
+        'slug' => 'en/lista-prodotti-EN/categoria-1-EN/prodotto-2-EN',
+        'language_id' => '2'
+    )
+);
+
+DB::table('products')->insert($products);
+
+
+$json = file_get_contents("https://www.df-sportspecialist.it/calcio-e-calcetto/scarpe-e-protezioni/?go=1");
+$json = json_decode($json);
+if(!empty($json)){
+   foreach($json as $codice_articolo){
+    $rows = DB::select("SELECT descrizione, prezzo_finale, marchio, tavolozza_colori, tipo_taglia, tipo_taglia2 FROM li_articoli WHERE codice_articolo = '".$codice_articolo."' LIMIT 1");
+    foreach($rows as $row){
         $products = array(
             array(
-                'codice_articolo' => '98339812',
-                'name' => 'prodotto 1 IT',
+                'codice_articolo' => $codice_articolo,
+                'name' => $row->descrizione,
                 'description' => 'description prodotto 1 IT',
-                'price' => '1000',
+                'price' => $row->prezzo_finale,
                 'active' => '1',
                 'rank' => '1',
-                'product_categories_id' => '1',
-                'brand_id' => '412',
-                'tavolozza_colori' => '7305',
-                'tipo_taglia' => '506',
-                'tipo_taglia_normalizzata' => '691',
-                'slug' => 'lista-prodotti-IT/categoria-1-IT/prodotto-1-IT'
-            ),
+                'brand_id' => $row->marchio,
+                'tavolozza_colori' => $row->tavolozza_colori,
+                'tipo_taglia' => $row->tipo_taglia,
+                'tipo_taglia_normalizzata' => $row->tipo_taglia2,
+                'slug' => $codice_articolo,
+                'language_id' => '1'
+            )
+        );
+        DB::table('products')->insert($products);
+
+        $slugs = array(
             array(
-                'codice_articolo' => '98338106',
-                'name' => 'prodotto 2 IT',
-                'description' => 'description prodotto 2 IT',
-                'price' => '1100',
-                'active' => '1',
-                'rank' => '10',
-                'product_categories_id' => '1',
-                'brand_id' => '9',
-                'tavolozza_colori' => '201',
-                'tipo_taglia' => '506',
-                'tipo_taglia_normalizzata' => '320',
-                'slug' => 'lista-prodotti-IT/categoria-1-IT/prodotto-2-IT'
-            ),
-            array(
-                'codice_articolo' => '98339812',
-                'name' => 'prodotto 1 EN',
-                'description' => 'description prodotto 1 EN',
-                'price' => '2000',
-                'active' => '1',
-                'rank' => '1',
-                'product_categories_id' => '2',
-                'brand_id' => '412',
-                'tavolozza_colori' => '7305',
-                'tipo_taglia' => '506',
-                'tipo_taglia_normalizzata' => '691',
-                'slug' => 'en/lista-prodotti-EN/categoria-1-EN/prodotto-1-EN'
-            ),
-            array(
-                'codice_articolo' => '98338106',
-                'name' => 'prodotto 2 EN',
-                'description' => 'description prodotto 2 EN',
-                'price' => '2100',
-                'active' => '1',
-                'rank' => '10',
-                'product_categories_id' => '2',
-                'brand_id' => '9',
-                'tavolozza_colori' => '201',
-                'tipo_taglia' => '506',
-                'tipo_taglia_normalizzata' => '320',
-                'slug' => 'en/lista-prodotti-EN/categoria-1-EN/prodotto-2-EN'
+                'slug' => $codice_articolo,
+                'model' => 'Product',
+                'seo_title' => $row->descrizione,
+                'seo_description' => 'Description prodotto 2 EN',
             )
         );
 
-        DB::table('products')->insert($products);
+        DB::table('slugs')->insert($slugs);
+
+        $products_in_categories = array(
+            array(
+                'codice_articolo' => $codice_articolo,
+                'product_category_id' => '5'
+            )
+        );
+
+        DB::table('products_in_categories')->insert($products_in_categories);
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
-    public function down()
-    {
-        //
+    $rows2 = DB::select("SELECT * FROM ec_tag_articoli_sport WHERE codice_articolo = '".$codice_articolo."'");
+    foreach($rows2 as $row2){
+        $products_filters_options = array(
+            array(
+                'codice_articolo' => $codice_articolo,
+                'filter_option_id' => $row2->id_opzione
+            )
+        );
+        DB::table('products_filters_options')->insert($products_filters_options);
     }
+}
+}
+
+$rows = DB::select("SELECT * FROM ec_tag_categorizzazione_sport WHERE categoria_id = '792'");
+foreach($rows as $row){
+    $filters = array(
+        array(
+            'id' => $row->id,
+            'name' => strtolower($row->tag),
+            'rank' => $row->ordinale,
+            'product_category_id' => 5
+        )
+    );
+    DB::table('filters')->insert($filters);
+
+    $rows_options = DB::select("SELECT * FROM ec_tag_categorizzazione_opzioni_sport WHERE tag_id = '".$row->id."'");
+    foreach($rows_options as $row_options){
+        $filter_options = array(
+            array(
+                'id' => $row_options->id,
+                'name' => strtolower($row_options->nome),
+                'rank' => $row_options->ordinale,
+                'filter_id' => $row->id
+            )
+        );
+        DB::table('filter_options')->insert($filter_options);
+    }
+}
+
+}
+
+public function down()
+{
+        //
+}
 }

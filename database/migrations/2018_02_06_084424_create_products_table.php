@@ -21,14 +21,14 @@ class CreateProductsTable extends Migration
             $table->integer('active')->length(1)->default(0);
             $table->integer('rank');
             $table->string('slug');
-            $table->integer('product_categories_id');
-            $table->foreign('product_categories_id')->references('id')->on('product_categories');
             $table->integer('brand_id');
             $table->foreign('brand_id')->references('marca')->on('li_marche');
             $table->integer('tavolozza_colori');
             $table->foreign('tavolozza_colori')->references('tavolozza_colori')->on('li_articoli');
             $table->integer('tipo_taglia');
             $table->foreign('tipo_taglia')->references('tipo_taglia')->on('li_taglie');
+            $table->integer('language_id');
+            $table->foreign('language_id')->references('id')->on('languages');
             $table->integer('tipo_taglia_normalizzata');
             $table->foreign('tipo_taglia_normalizzata')->references('tipo_taglia2')->on('li_taglie');
         });

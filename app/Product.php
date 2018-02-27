@@ -9,7 +9,9 @@ use App\Sale;
 
 class Product extends Model
 {
-    function brands(){ 
+	protected $primaryKey = 'codice_articolo';
+
+	function brands(){ 
     	//Model, chiave primaria del Model (Brand), Chiave esterna del Model corrente (Product)
 		return $this->hasOne('App\Brand', 'marca', 'brand_id');
 	}
@@ -22,17 +24,26 @@ class Product extends Model
 		return $this->hasMany('App\Barcode', 'codice_articolo', 'codice_articolo');
 	}
 
+	function filter_options(){ 	
+		return $this->belongsToMany('App\FilterOption', 'products_filters_options', 'codice_articolo');
+	}
+
 	function getPrice(){
-		$results = DB::select( DB::raw("SELECT prezzo_finale FROM li_articoli WHERE codice_articolo = '".$this->codice_articolo."' LIMIT 1") );	
-		$prezzo_gestionale = $results[0]->prezzo_finale;
+		$results = DB::table('li_articoli')->where('codice_articolo', $this->codice_articolo)->get();
+		$this->price_list = $prezzo_gestionale = $results[0]->prezzo_finale;
+
+		$prezzo_finale = $prezzo_gestionale;
 
 		$Sale = \App\Sale::where('codice_articolo', $this->codice_articolo)->first();
-
-		echo $Sale->percentuale_sconto."<br>";
-		echo $Sale->prezzo_fisso."<br>";
-				
+		if(is_object($Sale)){
+			if($Sale->percentuale_sconto > 0){
+				$prezzo_finale -= $prezzo_finale*$Sale->percentuale_sconto/100; 
+			}elseif($Sale->prezzo_fisso > 0){
+				$prezzo_finale = $Sale->prezzo_fisso; 
+			}
+		}
 		
 
-		$this->price = $prezzo_gestionale;				
+		$this->price = $prezzo_finale;				
 	}
 }
