@@ -31,6 +31,7 @@ class CreateProductsTable extends Migration
             $table->foreign('language_id')->references('id')->on('languages');
             $table->integer('tipo_taglia_normalizzata');
             $table->foreign('tipo_taglia_normalizzata')->references('tipo_taglia2')->on('li_taglie');
+            $table->index('codice_articolo');
         });
     }
 

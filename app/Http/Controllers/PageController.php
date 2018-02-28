@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Cache;
 
 class PageController extends Controller
 {
-	public function getprimaryMenu($language_id, $parent = 0){
+	static function getprimaryMenu($language_id, $parent = 0){
 
 		$pages = Language::find($language_id)->pages()->where('active', '1')->where('parent', $parent)->get();
 

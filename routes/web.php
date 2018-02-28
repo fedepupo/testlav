@@ -11,8 +11,15 @@
 |
 */
 
-Route::resource('/', 'SlugController');
-Route::get('{slug}', 'SlugController@index')->where('slug', '(.*)');;
+//Route::resource('/', 'SlugController');
+//Route::get('{slug}', 'SlugController@index')->where('slug', '(.*)');
+
+Route::get('/', ['middleware' => 'checkslug', function(){
+	return Config::get('view');
+}]);
+Route::get('{slug}', ['middleware' => 'checkslug', function(){
+	return Config::get('view');
+}])->where('slug', '.*');;
 
 
 

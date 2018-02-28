@@ -183,7 +183,7 @@ class InsertStaticData extends Migration
                 'content' => 'content news 1 IT',
                 'date' => '20180205',
                 'language_id' => '1',
-                'slug' => 'news-1-IT'
+                'slug' => 'lista-news-IT/news-1-IT'
             ),
             array(
                 'title' => 'news 1 EN',
